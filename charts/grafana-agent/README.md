@@ -1,6 +1,6 @@
 # grafana-agent
 
-![Version: 1.0.6](https://img.shields.io/badge/Version-1.0.6-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.0](https://img.shields.io/badge/AppVersion-0.14.0-informational?style=flat-square)
+![Version: 1.0.7](https://img.shields.io/badge/Version-1.0.7-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 0.14.0](https://img.shields.io/badge/AppVersion-0.14.0-informational?style=flat-square)
 
 This chart is a temporary solution while the [Operator is not finished](https://github.com/grafana/agent/pull/549),
 after that this chart will be discontinued.
@@ -44,7 +44,8 @@ A major chart version change indicates that there is an incompatible breaking ch
 | image.repository | string | `"grafana/agent"` | Docker image repository |
 | image.tag | string | `nil` | Overrides the image tag whose default is the chart's appVersion |
 | imagePullSecrets | list | `[]` | Image pull secrets for Docker images |
-| integrationsConfig | string | See `values.yaml` | Section for configuring the integrations part of the agent |
+| integrationsConfig | string | See `values.yaml` | Section for configuring the integrations part of the daemonset agents |
+| integrationsDeploymentConfig | string | See `values.yaml` | Section for configuring the integrations part of the deployment agent |
 | loki.basicAuth | object | `{}` | Credentials of the remote endpoint |
 | loki.config | string | See `values.yaml` | Section for configuring the loki part of the agent |
 | loki.enabled | bool | `true` | Enable metrics collection in daemonset mode. automatically mount /var/log and /var/lib/docker/containers to the pod when enabled |

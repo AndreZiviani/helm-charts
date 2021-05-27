@@ -119,9 +119,15 @@ extraEnvFrom: []
 agentServerConfig: |
   log_level: info
 
-# -- Section for configuring the integrations part of the agent
+# -- Section for configuring the integrations part of the daemonset agents
 # @default -- See `values.yaml`
 integrationsConfig: |
+  agent:
+    enabled: true
+
+# -- Section for configuring the integrations part of the deployment agent
+# @default -- See `values.yaml`
+integrationsDeploymentConfig: |
   agent:
     enabled: true
 
