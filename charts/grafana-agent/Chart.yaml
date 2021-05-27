@@ -9,4 +9,4 @@ sources:
   - https://grafana.com/docs/grafana-cloud/agent/
 icon: https://raw.githubusercontent.com/grafana/agent/main/docs/assets/logo_and_name.png
 maintainers:
-  - name: Andre Ziviani
+  - name: AndreZiviani
