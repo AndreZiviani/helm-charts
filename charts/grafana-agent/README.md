@@ -1,6 +1,6 @@
 # grafana-agent
 
-![Version: 1.0.15](https://img.shields.io/badge/Version-1.0.15-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.14.0](https://img.shields.io/badge/AppVersion-v0.14.0-informational?style=flat-square)
+![Version: 1.0.16](https://img.shields.io/badge/Version-1.0.16-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.14.0](https://img.shields.io/badge/AppVersion-v0.14.0-informational?style=flat-square)
 
 This chart is a temporary solution while the [Operator is not finished](https://github.com/grafana/agent/pull/549),
 after that this chart will be discontinued.
@@ -80,7 +80,7 @@ A major chart version change indicates that there is an incompatible breaking ch
 | tempo.remoteWriteURL | string | `"http://localhost"` |  |
 | tempo.strategies | string | `"{\"default_strategy\": {\"param\": 0.001, \"type\": \"probabilistic\"}}\n"` | Jaeger strategy |
 | tempo.tenant | string | `""` | Add the X-Scope-OrgID header to the requests, usefull when using multitenant tempo feature |
-| tolerations | list | `[{"effect":"NoSchedule","key":"node-role.kubernetes.io/master","operator":"Exists"}]` | Tolerations for pods. By default, pods will be scheduled on master nodes. |
+| tolerations | list | `[{"effect":"NoSchedule","operator":"Exists"}]` | Tolerations for pods |
 | updateStrategy | object | `{"type":"RollingUpdate"}` | The update strategy for the DaemonSet |
 
 ## Configuration
