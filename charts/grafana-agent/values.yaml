@@ -615,7 +615,8 @@ tempo:
   # -- Add the X-Scope-OrgID header to the requests, usefull when using multitenant tempo feature
   tenant: ""
   # -- Jaeger strategy
-  strategies: '{"default_strategy": {"param": 0.001, "type": "probabilistic"}}'
+  strategies: |
+    {"default_strategy": {"param": 0.001, "type": "probabilistic"}}
   # -- Section for configuring the tempo daemonset part of the agent
   # @default -- See `values.yaml`
   config: |
