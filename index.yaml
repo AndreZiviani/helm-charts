@@ -3,6 +3,23 @@ entries:
   grafana-agent:
   - apiVersion: v2
     appVersion: v0.14.0
+    created: "2021-05-27T20:51:34.212047944Z"
+    description: Grafana Agent is a telemetry collector for sending metrics, logs,
+      and trace data to the opinionated Grafana observability stack.
+    digest: 39f8224d0c289e10d218efcac0c77a5b2b4a7bc18a9596143cb9aff9d1dc0a72
+    home: https://github.com/grafana/agent/
+    icon: https://raw.githubusercontent.com/grafana/agent/main/docs/assets/logo_and_name.png
+    maintainers:
+    - name: AndreZiviani
+    name: grafana-agent
+    sources:
+    - https://grafana.com/docs/grafana-cloud/agent/
+    type: application
+    urls:
+    - https://github.com/AndreZiviani/helm-charts/releases/download/grafana-agent-1.0.15/grafana-agent-1.0.15.tgz
+    version: 1.0.15
+  - apiVersion: v2
+    appVersion: v0.14.0
     created: "2021-05-27T20:05:53.567292865Z"
     description: Grafana Agent is a telemetry collector for sending metrics, logs,
       and trace data to the opinionated Grafana observability stack.
@@ -205,4 +222,4 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/grafana-agent-1.0.3/grafana-agent-1.0.3.tgz
     version: 1.0.3
-generated: "2021-05-27T20:05:53.567347266Z"
+generated: "2021-05-27T20:51:34.212168551Z"
