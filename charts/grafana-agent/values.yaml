@@ -139,21 +139,23 @@ prometheusDaemonSet:
   # -- Section for configuring the prometheus daemonset part of the agent
   # @default -- See `values.yaml`
   config: |
+    global:
+      scrape_interval: 15s
+      remote_write:
+        - url: {{ .Values.prometheusDaemonSet.remoteWriteURL }}
+          {{- if .Values.prometheusDaemonSet.basicAuth }}
+          basic_auth:
+              password: {{ .Values.prometheusDaemonSet.basicAuth.password }}
+              username: {{ .Values.prometheusDaemonSet.basicAuth.username }}
+          {{- end }}
+          {{- if .Values.prometheusDaemonSet.tenant }}
+          headers:
+            "X-Scope-OrgID": {{ .Values.prometheusDaemonSet.tenant }}
+          {{- end }}
+    wal_directory: /var/lib/agent/data
     configs:
       - host_filter: true
         name: agent
-        global:
-          remote_write:
-            - url: {{ .Values.prometheusDaemonSet.remoteWriteURL }}
-              {{- if .Values.prometheusDaemonSet.basicAuth }}
-              basic_auth:
-                  password: {{ .Values.prometheusDaemonSet.basicAuth.password }}
-                  username: {{ .Values.prometheusDaemonSet.basicAuth.username }}
-              {{- end }}
-              {{- if .Values.prometheusDaemonSet.tenant }}
-              headers:
-                "X-Scope-OrgID": {{ .Values.prometheusDaemonSet.tenant }}
-              {{- end }}
         scrape_configs:
           - job_name: kubernetes-pods
             kubernetes_sd_configs:
@@ -266,9 +268,6 @@ prometheusDaemonSet:
             tls_config:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
                 insecure_skip_verify: false
-    global:
-        scrape_interval: 15s
-    wal_directory: /var/lib/agent/data
 
 prometheusDeployment:
   # -- Enable metrics collection in deployment mode
@@ -284,21 +283,23 @@ prometheusDeployment:
   # -- Section for configuring the prometheus deployment part of the agent
   # @default -- See `values.yaml`
   config: |
+    global:
+      scrape_interval: 15s
+      remote_write:
+        - url: {{ .Values.prometheusDeployment.remoteWriteURL }}
+          {{- if .Values.prometheusDeployment.basicAuth }}
+          basic_auth:
+              password: {{ .Values.prometheusDeployment.basicAuth.password }}
+              username: {{ .Values.prometheusDeployment.basicAuth.username }}
+          {{- end }}
+          {{- if .Values.prometheusDeployment.tenant }}
+          headers:
+            "X-Scope-OrgID": {{ .Values.prometheusDeployment.tenant }}
+          {{- end }}
+    wal_directory: /var/lib/agent/data
     configs:
       - host_filter: false
         name: agent
-        global:
-          remote_write:
-            - url: {{ .Values.prometheusDeployment.remoteWriteURL }}
-              {{- if .Values.prometheusDeployment.basicAuth }}
-              basic_auth:
-                  password: {{ .Values.prometheusDeployment.basicAuth.password }}
-                  username: {{ .Values.prometheusDeployment.basicAuth.username }}
-              {{- end }}
-              {{- if .Values.prometheusDeployment.tenant }}
-              headers:
-                "X-Scope-OrgID": {{ .Values.prometheusDeployment.tenant }}
-              {{- end }}
         scrape_configs:
           - bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
             job_name: default/kubernetes
@@ -319,9 +320,6 @@ prometheusDeployment:
                 ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
                 insecure_skip_verify: false
                 server_name: kubernetes
-    global:
-        scrape_interval: 15s
-    wal_directory: /var/lib/agent/data
 
 loki:
   # -- Enable metrics collection in daemonset mode.
