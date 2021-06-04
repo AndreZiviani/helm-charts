@@ -43,5 +43,5 @@ spec:
     protocol: TCP
     targetPort: 55678
   selector:
-    name: {{ include "agent.fullname" . }}
+    {{- include "agent.selectorLabels" . | nindent 4 }}
 {{- end }}
