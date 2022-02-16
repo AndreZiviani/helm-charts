@@ -1,6 +1,6 @@
 # grafana-agent
 
-![Version: 1.0.18](https://img.shields.io/badge/Version-1.0.18-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.15.0](https://img.shields.io/badge/AppVersion-v0.15.0-informational?style=flat-square)
+![Version: 1.0.20](https://img.shields.io/badge/Version-1.0.20-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: v0.23.0](https://img.shields.io/badge/AppVersion-v0.23.0-informational?style=flat-square)
 
 This chart is a temporary solution while the [Operator is not finished](https://github.com/grafana/agent/pull/549),
 after that this chart will be discontinued.
@@ -64,6 +64,7 @@ A major chart version change indicates that there is an incompatible breaking ch
 | prometheusDaemonSet.tenant | string | `""` | Add the X-Scope-OrgID header to the requests, usefull when using multitenant cortex feature |
 | prometheusDeployment.basicAuth | object | `{}` | Credentials of the remote endpoint |
 | prometheusDeployment.config | string | See `values.yaml` | Section for configuring the prometheus deployment part of the agent |
+| prometheusDeployment.containerSecurityContext | object | `{}` | The security context for container |
 | prometheusDeployment.enabled | bool | `true` | Enable metrics collection in deployment mode |
 | prometheusDeployment.remoteWriteURL | string | `"http://localhost/api/prom/push"` |  |
 | prometheusDeployment.tenant | string | `""` | Add the X-Scope-OrgID header to the requests, usefull when using multitenant cortex feature |
