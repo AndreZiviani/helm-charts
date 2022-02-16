@@ -3,7 +3,7 @@ name: grafana-agent
 description: Grafana Agent is a telemetry collector for sending metrics, logs, and trace data to the opinionated Grafana observability stack.
 type: application
 appVersion: v0.23.0
-version: 1.0.20
+version: 1.0.21
 home: https://github.com/grafana/agent/
 sources:
   - https://grafana.com/docs/grafana-cloud/agent/
