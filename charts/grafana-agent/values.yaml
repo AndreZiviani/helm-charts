@@ -326,6 +326,9 @@ prometheusDeployment:
                 insecure_skip_verify: false
                 server_name: kubernetes
 
+  # -- The security context for container
+  containerSecurityContext: {}
+
 loki:
   # -- Enable metrics collection in daemonset mode.
   # automatically mount /var/log and /var/lib/docker/containers to the pod when enabled

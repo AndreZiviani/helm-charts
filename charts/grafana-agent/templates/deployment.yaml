@@ -71,7 +71,7 @@ spec:
               containerPort: 80
               protocol: TCP
           securityContext:
-            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+            {{- toYaml .Values.prometheusDeployment.containerSecurityContext | nindent 12 }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
