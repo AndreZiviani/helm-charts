@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  github-actions-exporter:
+  - apiVersion: v2
+    appVersion: 1.8.1
+    created: "2022-04-01T14:42:30.697002491Z"
+    description: github-actions exporter for prometheus
+    digest: b033551314f533ec9e000c342273b8fad9d97234011f780aec4b952ac04d6a88
+    name: github-actions-exporter
+    type: application
+    urls:
+    - https://github.com/AndreZiviani/helm-charts/releases/download/github-actions-exporter-0.1.4/github-actions-exporter-0.1.4.tgz
+    version: 0.1.4
   grafana-agent:
   - apiVersion: v2
     appVersion: v0.23.0
@@ -324,4 +335,4 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/grafana-agent-1.0.3/grafana-agent-1.0.3.tgz
     version: 1.0.3
-generated: "2022-02-16T21:35:13.674949819Z"
+generated: "2022-04-01T14:42:30.697148292Z"
