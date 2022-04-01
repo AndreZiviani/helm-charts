@@ -44,7 +44,11 @@ serviceMonitor:
 
 imagePullSecrets: []
 
+serviceAnnotations: {}
+
 podAnnotations: {}
+
+podStrategy: Recreate
 
 podSecurityContext: {}
 #  fsGroup: 2000
