@@ -9,7 +9,7 @@ image:
 
 imagePullSecrets: []
 
-command: 
+command:
   - "sleep"
 args:
   - "infinity"
