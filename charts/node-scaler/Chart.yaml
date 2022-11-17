@@ -2,7 +2,7 @@ apiVersion: v2
 name: node-scaler
 description: Creates a dummy deployment with strict pod anti affinity allowing to force minimum node group size
 type: application
-appVersion: v0.0.2
-version: 1.0.0
+appVersion: v0.0.1
+version: 1.1.0
 maintainers:
   - name: AndreZiviani
