@@ -14,6 +14,7 @@ helm repo add andreziviani https://andreziviani.github.io/node-scaler
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| affinity | string | `"podAntiAffinity:\n  requiredDuringSchedulingIgnoredDuringExecution:\n    - labelSelector:\n        matchLabels:\n          {{- include \"node-scaler.selectorLabels\" . | nindent 10 }}\n      topologyKey: kubernetes.io/hostname\n"` |  |
 | annotations | object | `{}` |  |
 | args[0] | string | `"infinity"` |  |
 | command[0] | string | `"sleep"` |  |
@@ -31,8 +32,9 @@ helm repo add andreziviani https://andreziviani.github.io/node-scaler
 | podLabels | object | `{}` |  |
 | podSecurityContext | object | `{}` |  |
 | priorityClassName | string | `"system-node-critical"` |  |
+| replicas | int | `2` |  |
 | resources.requests.cpu | string | `"1m"` |  |
 | resources.requests.memory | string | `"10Mi"` |  |
 | tolerations | string | `"- effect: NoSchedule\n  operator: Exists\n"` |  |
-| topologySpreadConstraints | string | `"- maxSkew: 1\n  topologyKey: kubernetes.io/hostname\n  whenUnsatisfiable: DoNotSchedule\n  labelSelector:\n    matchLabels:\n      app.kubernetes.io/name: {{ include \"node-scaler.name\" . }}\n"` |  |
+| topologySpreadConstraints | string | `"- maxSkew: 1\n  topologyKey: topology.kubernetes.io/zone\n  whenUnsatisfiable: DoNotSchedule\n  labelSelector:\n    matchLabels:\n      {{- include \"node-scaler.selectorLabels\" . | nindent 6 }}\n"` |  |
 | updateStrategy.type | string | `"RollingUpdate"` |  |
