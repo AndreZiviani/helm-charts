@@ -49,7 +49,3 @@ Selector labels
 app.kubernetes.io/name: {{ include "node-scaler.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-{{- define "node-scaler-deployment.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "node-scaler.name" . }}-deployment
-app.kubernetes.io/instance: {{ .Release.Name }}
-{{- end }}

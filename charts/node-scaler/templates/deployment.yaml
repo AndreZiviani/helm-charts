@@ -11,17 +11,18 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "node-scaler-deployment.selectorLabels" . | nindent 6 }}
+      {{- include "node-scaler.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
-        {{- include "node-scaler-deployment.selectorLabels" . | nindent 8 }}
+        {{- include "node-scaler.selectorLabels" . | nindent 8 }}
         {{- with .Values.podLabels }}
-        {{ toYaml . | indent 8 }}
+        {{- toYaml . | indent 8 }}
         {{- end }}
       annotations:
         {{- with .Values.podAnnotations }}
-        {{ toYaml . | indent 8 }}
+        {{- toYaml . | indent 8 }}
         {{- end }}
     spec:
       {{- with .Values.priorityClassName }}
@@ -39,12 +40,14 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
             {{ toYaml .Values.command }}
+          {{- with .Values.args }}
           args:
-            {{- with .Values.args }}
             {{- toYaml . | nindent 12 }}
-            {{- end }}
+          {{- end }}
+          {{- with .Values.containerSecurityContext }}
           securityContext:
-            {{- toYaml .Values.containerSecurityContext | nindent 12 }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           {{- with .Values.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
@@ -55,3 +58,7 @@ spec:
         {{- tpl (.Values.nodeSelector) . | nindent 8 }}
       tolerations:
         {{- tpl (.Values.tolerations) . | nindent 8 }}
+      {{- if .Values.affinity }}
+      affinity:
+        {{- tpl (.Values.affinity) . | nindent 8 }}
+      {{- end }}
