@@ -1,6 +1,31 @@
 nameOverride: null
 fullnameOverride: null
 
+replicas: 2
+
+nodeSelector: |
+  selector: label
+
+topologySpreadConstraints: |
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        {{- include "node-scaler.selectorLabels" . | nindent 6 }}
+
+affinity: |
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            {{- include "node-scaler.selectorLabels" . | nindent 10 }}
+        topologyKey: kubernetes.io/hostname
+
+tolerations: |
+  - effect: NoSchedule
+    operator: Exists
+
 image:
   registry: docker.io
   repository: alpine
@@ -13,21 +38,6 @@ command:
   - "sleep"
 args:
   - "infinity"
-
-nodeSelector: |
-  selector: label
-
-topologySpreadConstraints: |
-  - maxSkew: 1
-    topologyKey: kubernetes.io/hostname
-    whenUnsatisfiable: DoNotSchedule
-    labelSelector:
-      matchLabels:
-        app.kubernetes.io/name: {{ include "node-scaler.name" . }}
-
-tolerations: |
-  - effect: NoSchedule
-    operator: Exists
 
 annotations: {}
 
