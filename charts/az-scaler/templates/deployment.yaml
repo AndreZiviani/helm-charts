@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "node-scaler.fullname" . }}
+  name: {{ include "az-scaler.fullname" . }}
   labels:
-    {{- include "node-scaler.labels" . | nindent 4 }}
+    {{- include "az-scaler.labels" . | nindent 4 }}
   {{- with .Values.annotations }}
   annotations:
     {{ toYaml . | indent 4 }}
@@ -11,12 +11,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "node-scaler.selectorLabels" . | nindent 6 }}
+      {{- include "az-scaler.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.replicas }}
   template:
     metadata:
       labels:
-        {{- include "node-scaler.selectorLabels" . | nindent 8 }}
+        {{- include "az-scaler.selectorLabels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | indent 8 }}
         {{- end }}
@@ -35,7 +35,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: node-scaler
+        - name: az-scaler
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:

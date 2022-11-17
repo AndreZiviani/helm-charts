@@ -12,15 +12,19 @@ topologySpreadConstraints: |
     whenUnsatisfiable: DoNotSchedule
     labelSelector:
       matchLabels:
-        {{- include "node-scaler.selectorLabels" . | nindent 6 }}
+        {{- include "az-scaler.selectorLabels" . | nindent 6 }}
 
 affinity: |
   podAntiAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchLabels:
-            {{- include "node-scaler.selectorLabels" . | nindent 10 }}
-        topologyKey: kubernetes.io/hostname
+    - labelSelector:
+        matchLabels:
+          {{- include "az-scaler.selectorLabels" . | nindent 10 }}
+      topologyKey: topology.kubernetes.io/zone
+    - labelSelector:
+        matchLabels:
+          {{- include "az-scaler.selectorLabels" . | nindent 10 }}
+      topologyKey: kubernetes.io/hostname
 
 tolerations: |
   - effect: NoSchedule

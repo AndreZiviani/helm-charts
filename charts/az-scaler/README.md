@@ -1,20 +1,20 @@
-# node-scaler
+# az-scaler
 
-Creates a dummy deployment with strict pod anti affinity allowing to force minimum node group size
+Creates a dummy deployment with strict pod anti affinity allowing to force minimum availability zone count
 
 ## Chart Repo
 
 Add the following repo to use the chart:
 
 ```console
-helm repo add andreziviani https://andreziviani.github.io/node-scaler
+helm repo add andreziviani https://andreziviani.github.io/az-scaler
 ```
 
 ## Values
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
-| affinity | string | `"podAntiAffinity:\n  requiredDuringSchedulingIgnoredDuringExecution:\n    - labelSelector:\n        matchLabels:\n          {{- include \"node-scaler.selectorLabels\" . | nindent 10 }}\n      topologyKey: kubernetes.io/hostname\n"` |  |
+| affinity | string | `"podAntiAffinity:\n  requiredDuringSchedulingIgnoredDuringExecution:\n  - labelSelector:\n      matchLabels:\n        {{- include \"az-scaler.selectorLabels\" . | nindent 10 }}\n    topologyKey: topology.kubernetes.io/zone\n  - labelSelector:\n      matchLabels:\n        {{- include \"az-scaler.selectorLabels\" . | nindent 10 }}\n    topologyKey: kubernetes.io/hostname\n"` |  |
 | annotations | object | `{}` |  |
 | args[0] | string | `"infinity"` |  |
 | command[0] | string | `"sleep"` |  |
@@ -36,5 +36,5 @@ helm repo add andreziviani https://andreziviani.github.io/node-scaler
 | resources.requests.cpu | string | `"1m"` |  |
 | resources.requests.memory | string | `"10Mi"` |  |
 | tolerations | string | `"- effect: NoSchedule\n  operator: Exists\n"` |  |
-| topologySpreadConstraints | string | `"- maxSkew: 1\n  topologyKey: topology.kubernetes.io/zone\n  whenUnsatisfiable: DoNotSchedule\n  labelSelector:\n    matchLabels:\n      {{- include \"node-scaler.selectorLabels\" . | nindent 6 }}\n"` |  |
+| topologySpreadConstraints | string | `"- maxSkew: 1\n  topologyKey: topology.kubernetes.io/zone\n  whenUnsatisfiable: DoNotSchedule\n  labelSelector:\n    matchLabels:\n      {{- include \"az-scaler.selectorLabels\" . | nindent 6 }}\n"` |  |
 | updateStrategy.type | string | `"RollingUpdate"` |  |
