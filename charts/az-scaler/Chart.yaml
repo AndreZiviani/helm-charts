@@ -1,0 +1,8 @@
+apiVersion: v2
+name: az-scaler
+description: Creates a dummy deployment with strict pod anti affinity allowing to force minimum availability zone count
+type: application
+appVersion: v0.0.1
+version: 1.0.0
+maintainers:
+  - name: AndreZiviani

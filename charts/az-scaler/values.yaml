@@ -1,0 +1,71 @@
+nameOverride: null
+fullnameOverride: null
+
+replicas: 2
+
+nodeSelector: |
+  selector: label
+
+topologySpreadConstraints: |
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        {{- include "az-scaler.selectorLabels" . | nindent 6 }}
+
+affinity: |
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchLabels:
+          {{- include "az-scaler.selectorLabels" . | nindent 10 }}
+      topologyKey: topology.kubernetes.io/zone
+    - labelSelector:
+        matchLabels:
+          {{- include "az-scaler.selectorLabels" . | nindent 10 }}
+      topologyKey: kubernetes.io/hostname
+
+tolerations: |
+  - effect: NoSchedule
+    operator: Exists
+
+image:
+  registry: docker.io
+  repository: alpine
+  tag: latest
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+command:
+  - "sleep"
+args:
+  - "infinity"
+
+annotations: {}
+
+updateStrategy:
+  type: RollingUpdate
+
+podLabels: {}
+
+podAnnotations: {}
+#  prometheus.io/scrape: "true"
+#  prometheus.io/port: "http-metrics"
+
+priorityClassName: system-node-critical
+
+resources:
+  requests:
+    cpu: 1m
+    memory: 10Mi
+#  limits:
+#    cpu: 5m
+#    memory: 20Mi
+
+podSecurityContext: {}
+
+containerSecurityContext:
+  privileged: false
+  runAsUser: 1000
