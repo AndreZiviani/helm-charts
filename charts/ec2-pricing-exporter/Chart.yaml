@@ -1,0 +1,8 @@
+apiVersion: v2
+name: ec2-pricing-exporter
+description: Exports the price of each EC2 instance type (spot and ondemand) as prometheus metrics
+type: application
+appVersion: v0.2.0
+version: 0.1.0
+maintainers:
+  - name: AndreZiviani
