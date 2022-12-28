@@ -62,7 +62,7 @@ serviceMonitor:
   interval: 30s
   scheme: http
   tlsConfig: {}
-  scrapeTimeout: 120s
+  scrapeTimeout: 30s
   relabelings: []
 
 #nodeSelector: |

@@ -44,12 +44,12 @@ helm repo add andreziviani https://andreziviani.github.io/helm-charts
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.labels | object | `{}` |  |
 | serviceAccount.name | string | `nil` |  |
-| serviceMonitor.enabled | bool | `true` |  |
+| serviceMonitor.enabled | bool | `false` |  |
 | serviceMonitor.interval | string | `"30s"` |  |
 | serviceMonitor.labels | object | `{}` |  |
 | serviceMonitor.path | string | `"/metrics"` |  |
 | serviceMonitor.relabelings | list | `[]` |  |
 | serviceMonitor.scheme | string | `"http"` |  |
-| serviceMonitor.scrapeTimeout | string | `"120s"` |  |
+| serviceMonitor.scrapeTimeout | string | `"30s"` |  |
 | serviceMonitor.tlsConfig | object | `{}` |  |
 | updateStrategy.type | string | `"RollingUpdate"` |  |
