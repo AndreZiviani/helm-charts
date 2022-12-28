@@ -14,6 +14,20 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/az-scaler-1.0.2/az-scaler-1.0.2.tgz
     version: 1.0.2
+  ec2-pricing-exporter:
+  - apiVersion: v2
+    appVersion: v0.2.0
+    created: "2022-12-28T16:40:34.136148282Z"
+    description: Exports the price of each EC2 instance type (spot and ondemand) as
+      prometheus metrics
+    digest: 8a390ea7edaaadd51dfb08bdcb344abc79c27a4b0c0a023239a16c1632f9ffa7
+    maintainers:
+    - name: AndreZiviani
+    name: ec2-pricing-exporter
+    type: application
+    urls:
+    - https://github.com/AndreZiviani/helm-charts/releases/download/ec2-pricing-exporter-0.1.0/ec2-pricing-exporter-0.1.0.tgz
+    version: 0.1.0
   github-actions-exporter:
   - apiVersion: v2
     appVersion: 1.8.1
@@ -373,4 +387,4 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/node-scaler-1.1.1/node-scaler-1.1.1.tgz
     version: 1.1.1
-generated: "2022-11-17T02:41:12.132622511Z"
+generated: "2022-12-28T16:40:34.136288384Z"
