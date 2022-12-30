@@ -30,6 +30,9 @@ helm repo add andreziviani https://andreziviani.github.io/helm-charts
 | podPortName | string | `"http-metrics"` |  |
 | podSecurityContext | object | `{}` |  |
 | priorityClassName | string | `"system-node-critical"` |  |
+| rbac.annotations | object | `{}` |  |
+| rbac.create | bool | `true` |  |
+| rbac.labels | object | `{}` |  |
 | replicas | int | `1` |  |
 | resources.requests.cpu | string | `"50m"` |  |
 | resources.requests.memory | string | `"128Mi"` |  |

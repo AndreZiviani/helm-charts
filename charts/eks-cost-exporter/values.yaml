@@ -63,6 +63,11 @@ serviceMonitor:
   scrapeTimeout: 30s
   relabelings: []
 
+rbac:
+  create: true
+  labels: {}
+  annotations: {}
+
 #nodeSelector: |
 #  selector: label
 #
