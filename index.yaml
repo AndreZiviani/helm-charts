@@ -56,6 +56,18 @@ entries:
     version: 0.1.0
   eks-cost-exporter:
   - apiVersion: v2
+    appVersion: v0.4.0
+    created: "2022-12-31T21:08:59.704213656Z"
+    description: Exports the cost of each Kubernetes pod as prometheus metrics
+    digest: 2ee554c12d2c76e245f293ac57daf7b00eafc25ed7d0b3c6995263d5f9253892
+    maintainers:
+    - name: AndreZiviani
+    name: eks-cost-exporter
+    type: application
+    urls:
+    - https://github.com/AndreZiviani/helm-charts/releases/download/eks-cost-exporter-0.4.0/eks-cost-exporter-0.4.0.tgz
+    version: 0.4.0
+  - apiVersion: v2
     appVersion: v0.3.0
     created: "2022-12-31T20:19:32.81853124Z"
     description: Exports the cost of each Kubernetes pod as prometheus metrics
@@ -462,4 +474,4 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/node-scaler-1.1.1/node-scaler-1.1.1.tgz
     version: 1.1.1
-generated: "2022-12-31T20:19:32.818765939Z"
+generated: "2022-12-31T21:08:59.704274156Z"
