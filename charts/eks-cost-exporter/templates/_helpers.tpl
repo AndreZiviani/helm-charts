@@ -60,3 +60,19 @@ Create the name of the service account
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Convert a list of options to csv
+*/}}
+{{- define "eks-cost-exporter.addPodLabels" -}}
+{{- if gt (len .Values.addPodLabels) 0 }}
+{{- $tmp := join "," .Values.addPodLabels }}
+{{- list "--addPodLabels" $tmp | toYaml }}
+{{- end }}
+{{- end }}
+{{- define "eks-cost-exporter.addNodeLabels" -}}
+{{- if gt (len .Values.addNodeLabels) 0 }}
+{{- $tmp := join "," .Values.addNodeLabels }}
+{{- list "--addNodeLabels" $tmp | toYaml }}
+{{- end }}
+{{- end }}

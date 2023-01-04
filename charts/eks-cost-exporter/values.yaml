@@ -10,6 +10,16 @@ image:
 
 imagePullSecrets: []
 
+addPodLabels: []
+addNodeLabels: []
+#addPodLabels:
+#  - app
+#  - app.kubernetes.io/name
+#
+#addNodeLabels:
+#  - kubernetes.io/os
+#  - kubernetes.io/arch
+
 args: []
 
 annotations: {}

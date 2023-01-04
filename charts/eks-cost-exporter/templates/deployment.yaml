@@ -39,10 +39,12 @@ spec:
         - name: eks-cost-exporter
           image: "{{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- with .Values.args }}
           args:
+          {{- with .Values.args }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
+            {{ include "eks-cost-exporter.addPodLabels" . | nindent 12 }}
+            {{ include "eks-cost-exporter.addNodeLabels" . | nindent 12 }}
           {{- with .Values.containerSecurityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}

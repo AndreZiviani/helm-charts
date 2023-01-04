@@ -14,6 +14,8 @@ helm repo add andreziviani https://andreziviani.github.io/helm-charts
 
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
+| addNodeLabels | list | `[]` |  |
+| addPodLabels | list | `[]` |  |
 | annotations | object | `{}` |  |
 | args | list | `[]` |  |
 | containerSecurityContext.privileged | bool | `false` |  |
