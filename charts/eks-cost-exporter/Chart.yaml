@@ -2,7 +2,7 @@ apiVersion: v2
 name: eks-cost-exporter
 description: Exports the cost of each Kubernetes pod as prometheus metrics
 type: application
-appVersion: v0.8.0
-version: 0.8.0
+appVersion: v0.8.1
+version: 0.8.1
 maintainers:
   - name: AndreZiviani
