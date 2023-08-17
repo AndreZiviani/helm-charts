@@ -2,6 +2,18 @@ apiVersion: v1
 entries:
   aws-health-exporter:
   - apiVersion: v2
+    appVersion: v0.0.9
+    created: "2023-08-17T20:49:09.935913662Z"
+    description: Sends AWS Health events to slack
+    digest: e3f02d91adc6ab5bd20230a1622258de42c78f621e57b84c55990d79534e1ae9
+    maintainers:
+    - name: AndreZiviani
+    name: aws-health-exporter
+    type: application
+    urls:
+    - https://github.com/AndreZiviani/helm-charts/releases/download/aws-health-exporter-0.0.9/aws-health-exporter-0.0.9.tgz
+    version: 0.0.9
+  - apiVersion: v2
     appVersion: v0.0.8
     created: "2023-06-13T22:52:53.005312262Z"
     description: Sends AWS Health events to slack
@@ -667,4 +679,4 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/node-scaler-1.1.1/node-scaler-1.1.1.tgz
     version: 1.1.1
-generated: "2023-06-13T22:52:53.005633666Z"
+generated: "2023-08-17T20:49:09.936554271Z"
