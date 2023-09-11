@@ -2,7 +2,7 @@ apiVersion: v2
 name: aws-health-exporter
 description: Sends AWS Health events to slack
 type: application
-appVersion: v0.0.9
-version: 0.0.9
+appVersion: v0.0.10
+version: 0.0.10
 maintainers:
   - name: AndreZiviani
