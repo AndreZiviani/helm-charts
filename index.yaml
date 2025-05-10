@@ -691,4 +691,17 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/node-scaler-1.1.1/node-scaler-1.1.1.tgz
     version: 1.1.1
-generated: "2023-09-11T19:21:49.288856762Z"
+  telnet-exporter:
+  - apiVersion: v2
+    appVersion: v0.2.0
+    created: "2025-05-10T19:23:17.558464047Z"
+    description: Exposes metrics from remote hosts for Prometheus via Telnet
+    digest: 9477a80a134357207656e56e6e78e25d0fdbec46419d99a2356958bd178fcb3f
+    maintainers:
+    - name: AndreZiviani
+    name: telnet-exporter
+    type: application
+    urls:
+    - https://github.com/AndreZiviani/helm-charts/releases/download/telnet-exporter-0.2.0/telnet-exporter-0.2.0.tgz
+    version: 0.2.0
+generated: "2025-05-10T19:23:17.558581516Z"
