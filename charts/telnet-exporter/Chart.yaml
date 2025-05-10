@@ -1,0 +1,8 @@
+apiVersion: v2
+name: telnet-exporter
+description: Exposes metrics from remote hosts for Prometheus via Telnet
+type: application
+appVersion: v0.2.0
+version: 0.2.0
+maintainers:
+  - name: AndreZiviani

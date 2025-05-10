@@ -1,0 +1,114 @@
+nameOverride: null
+fullnameOverride: null
+
+image:
+  registry: docker.io
+  repository: andreziviani/telnet-exporter
+  # -- Overrides the image tag whose default is the chart's appVersion
+  tag: null
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+args: [
+  "--config-file",
+  "/app/telnet-exporter.yaml",
+]
+
+env: {}
+
+annotations: {}
+
+config: |
+  hosts:
+    192.168.0.1:
+      username: monitoring
+      password: example
+      commands: &main_commands
+        - command: uptime
+          metrics:
+            load_avg_1min:
+              help: Load average last 1 min
+              regex: "load average:\\s+(\\d+\\.\\d+)"
+              labels:
+                example: bar
+            load_avg_5min:
+              regex: "load average:\\s+\\d+\\.\\d+,\\s+(\\d+\\.\\d+)"
+    192.168.0.2:
+      username: user
+      password: secret
+      commands: *main_commands
+
+updateStrategy:
+  type: RollingUpdate
+
+podLabels: {}
+
+podAnnotations: {}
+#  prometheus.io/scrape: "true"
+#  prometheus.io/port: "http-metrics"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 128Mi
+#  limits:
+#    cpu: 5m
+#    memory: 20Mi
+
+podPortName: http-metrics
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+  targetPort: 9342
+  annotations: {}
+  labels: {}
+  portName: http-metrics
+
+serviceAccount:
+  create: true
+  name: null
+  labels: {}
+  #annotations:
+  #  eks.amazonaws.com/role-arn: ...
+
+serviceMonitor:
+  enabled: false
+  path: /metrics
+  labels: {}
+  interval: 30s
+  scheme: http
+  tlsConfig: {}
+  scrapeTimeout: 30s
+  relabelings: []
+
+#nodeSelector: |
+#  selector: label
+#
+#topologySpreadConstraints: |
+#  - maxSkew: 1
+#    topologyKey: topology.kubernetes.io/zone
+#    whenUnsatisfiable: DoNotSchedule
+#    labelSelector:
+#      matchLabels:
+#        {{- include "telnet-exporter.selectorLabels" . | nindent 6 }}
+#
+#affinity: |
+#  podAntiAffinity:
+#    requiredDuringSchedulingIgnoredDuringExecution:
+#      - labelSelector:
+#          matchLabels:
+#            {{- include "telnet-exporter.selectorLabels" . | nindent 10 }}
+#        topologyKey: kubernetes.io/hostname
+#
+#tolerations: |
+#  - effect: NoSchedule
+#    operator: Exists
+
+podSecurityContext: {}
+
+containerSecurityContext:
+  privileged: false
+  runAsUser: 1000
