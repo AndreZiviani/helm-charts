@@ -691,6 +691,21 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/node-scaler-1.1.1/node-scaler-1.1.1.tgz
     version: 1.1.1
+  resource-scaler:
+  - apiVersion: v2
+    appVersion: v0.0.1
+    created: "2026-02-08T12:34:19.755109332Z"
+    description: Creates low-priority placeholder pods that reserve cluster resources,
+      acting as a buffer to prevent node flapping caused by autoscaler scale-up/scale-down
+      cycles
+    digest: c129ab7f43a5951acb65c81b1a2b7bad1de477f0271012dfdffb7baf0a69b65c
+    maintainers:
+    - name: AndreZiviani
+    name: resource-scaler
+    type: application
+    urls:
+    - https://github.com/AndreZiviani/helm-charts/releases/download/resource-scaler-1.0.0/resource-scaler-1.0.0.tgz
+    version: 1.0.0
   telnet-exporter:
   - apiVersion: v2
     appVersion: v0.2.0
@@ -704,4 +719,4 @@ entries:
     urls:
     - https://github.com/AndreZiviani/helm-charts/releases/download/telnet-exporter-0.2.0/telnet-exporter-0.2.0.tgz
     version: 0.2.0
-generated: "2025-05-10T19:23:17.558581516Z"
+generated: "2026-02-08T12:34:19.755239267Z"
