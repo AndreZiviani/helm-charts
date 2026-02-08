@@ -1,0 +1,39 @@
+{{ template "chart.header" . }}
+
+{{ template "chart.description" . }}
+
+{{ template "chart.sourcesSection" . }}
+
+{{ template "chart.requirementsSection" . }}
+
+## How it works
+
+This chart deploys low-priority placeholder pods that reserve cluster resources (CPU/memory).
+When a real workload needs to scale up:
+
+1. The Kubernetes scheduler sees there aren't enough resources on existing nodes
+2. Instead of waiting for a new node to be provisioned, it **evicts** the low-priority buffer pod
+3. The real workload is immediately scheduled on the freed-up resources
+4. The evicted buffer pod becomes Pending, which may trigger the cluster autoscaler to add a new node in the background
+
+This eliminates the delay of waiting for a new node to spin up (which can take minutes on AWS) and reduces instance flapping from rapid scale-up/scale-down cycles.
+
+## Chart Repo
+
+Add the following repo to use the chart:
+
+```console
+helm repo add andreziviani https://andreziviani.github.io/helm-charts
+```
+
+## Quick Start
+
+```console
+helm install resource-buffer andreziviani/resource-scaler \
+  --set replicas=2 \
+  --set resources.requests.cpu=1 \
+  --set resources.requests.memory=1Gi \
+  --set nodeSelector=""
+```
+
+{{ template "chart.valuesSection" . }}

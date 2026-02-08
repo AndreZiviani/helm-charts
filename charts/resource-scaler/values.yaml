@@ -1,0 +1,76 @@
+nameOverride: null
+fullnameOverride: null
+
+# Number of buffer pods to create.
+# Each pod reserves the amount of resources defined in `resources.requests`.
+replicas: 1
+
+# PriorityClass configuration
+# The low-priority class ensures these pods are evicted first
+# when real workloads need the resources.
+priorityClass:
+  # Set to false if you want to use an existing PriorityClass
+  create: true
+  # Name of the PriorityClass to create/use.
+  # If not set, it will be auto-generated from the release name.
+  name: ""
+  # Priority value. Must be lower than your real workloads (default is 0).
+  # Using -1 ensures buffer pods are always evicted first.
+  value: -1
+  # Whether this PriorityClass is the global default (should be false)
+  globalDefault: false
+  # If true, pods with this priority will not preempt other pods.
+  # This prevents the buffer pods from ever evicting real workloads.
+  preemptionPolicy: Never
+  description: "Low-priority class for resource buffer placeholder pods. These pods are meant to be evicted when real workloads need resources."
+
+nodeSelector: |
+  selector: label
+
+topologySpreadConstraints: ""
+
+affinity: ""
+
+tolerations: |
+  - effect: NoSchedule
+    operator: Exists
+
+image:
+  registry: registry.k8s.io
+  repository: pause
+  tag: "3.9"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+# command/args are not needed for the pause container
+# but can be overridden if using a different image (e.g. alpine + sleep infinity)
+command: []
+args: []
+
+annotations: {}
+
+updateStrategy:
+  type: RollingUpdate
+
+podLabels: {}
+
+podAnnotations: {}
+
+# Resource requests define the size of the resource buffer.
+# These are the resources that will be "reserved" and released
+# when real workloads need them.
+resources:
+  requests:
+    cpu: "1"
+    memory: 1Gi
+#  limits:
+#    cpu: "1"
+#    memory: 1Gi
+
+podSecurityContext: {}
+
+containerSecurityContext:
+  privileged: false
+  runAsUser: 65534
+  runAsNonRoot: true

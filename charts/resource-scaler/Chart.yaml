@@ -1,0 +1,8 @@
+apiVersion: v2
+name: resource-scaler
+description: Creates low-priority placeholder pods that reserve cluster resources, acting as a buffer to prevent node flapping caused by autoscaler scale-up/scale-down cycles
+type: application
+appVersion: v0.0.1
+version: 1.0.0
+maintainers:
+  - name: AndreZiviani
