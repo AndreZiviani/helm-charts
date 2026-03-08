@@ -14,15 +14,42 @@ args:
   - "--config"
   - "/app/config.yaml"
 
-env: {}
+env: []
+# - name: MY_VAR
+#   value: my-value
+# - name: SECRET_VAR
+#   valueFrom:
+#     secretKeyRef:
+#       name: my-secret
+#       key: my-key
 
 ipinfo:
   # -- Name of an existing secret containing the ipinfo.io API token.
   # The secret must have a key matching secretKey below.
   # When set, the token is injected as the IPINFO_TOKEN environment variable,
   # taking precedence over any token set in the config block.
+  # When externalSecret.enabled is true, this is auto-wired to the ESO-managed secret.
   existingSecret: ""
   secretKey: token
+
+externalSecret:
+  # -- Enable ExternalSecret to pull secrets from an external store (e.g. 1Password).
+  # Requires External Secrets Operator to be installed.
+  # The created Kubernetes Secret is automatically used for ipinfo token injection.
+  enabled: false
+  refreshInterval: 1h
+  secretStoreRef:
+    name: onepassword
+    kind: ClusterSecretStore
+  target:
+    # -- Name of the created Kubernetes Secret. Defaults to the chart fullname.
+    name: ""
+  # -- Mappings from Kubernetes Secret keys to external secret references.
+  data: []
+  #  - secretKey: token
+  #    remoteRef:
+  #      key: "ipinfo API"      # 1Password item title
+  #      property: credential   # 1Password field name
 
 annotations: {}
 

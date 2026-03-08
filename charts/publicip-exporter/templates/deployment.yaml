@@ -48,16 +48,20 @@ spec:
           {{- with .Values.args }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- if or .Values.env .Values.ipinfo.existingSecret }}
+          {{- $secretName := .Values.ipinfo.existingSecret }}
+          {{- if and (not $secretName) .Values.externalSecret.enabled }}
+            {{- $secretName = .Values.externalSecret.target.name | default (include "publicip-exporter.fullname" .) }}
+          {{- end }}
+          {{- if or .Values.env $secretName }}
           env:
             {{- with .Values.env }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-            {{- if .Values.ipinfo.existingSecret }}
+            {{- if $secretName }}
             - name: IPINFO_TOKEN
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Values.ipinfo.existingSecret }}
+                  name: {{ $secretName }}
                   key: {{ .Values.ipinfo.secretKey }}
             {{- end }}
           {{- end }}
