@@ -1,0 +1,126 @@
+nameOverride: null
+fullnameOverride: null
+
+image:
+  registry: docker.io
+  repository: andreziviani/publicip-exporter
+  # -- Overrides the image tag whose default is the chart's appVersion
+  tag: null
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+
+args:
+  - "--config"
+  - "/app/config.yaml"
+
+env: {}
+
+ipinfo:
+  # -- Name of an existing secret containing the ipinfo.io API token.
+  # The secret must have a key matching secretKey below.
+  # When set, the token is injected as the IPINFO_TOKEN environment variable,
+  # taking precedence over any token set in the config block.
+  existingSecret: ""
+  secretKey: token
+
+annotations: {}
+
+config: |
+  server:
+    listen_address: ":9101"
+
+  ipinfo:
+    refresh_interval: 60s
+
+  ping:
+    interval: 5s
+    count: 3
+    timeout: 5s
+    privileged: false
+    destinations:
+      - name: google-dns
+        host: 8.8.8.8
+      - name: cloudflare-dns
+        host: 1.1.1.1
+
+  http:
+    interval: 30s
+    timeout: 10s
+    destinations:
+      - name: google
+        url: https://google.com
+
+updateStrategy:
+  type: RollingUpdate
+
+podLabels: {}
+
+podAnnotations: {}
+#  prometheus.io/scrape: "true"
+#  prometheus.io/port: "http-metrics"
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+#  limits:
+#    cpu: 100m
+#    memory: 128Mi
+
+podPortName: http-metrics
+
+service:
+  enabled: true
+  type: ClusterIP
+  port: 80
+  targetPort: 9101
+  annotations: {}
+  labels: {}
+  portName: http-metrics
+
+serviceAccount:
+  create: true
+  name: null
+  labels: {}
+  #annotations:
+  #  eks.amazonaws.com/role-arn: ...
+
+serviceMonitor:
+  enabled: false
+  path: /metrics
+  labels: {}
+  interval: 30s
+  scheme: http
+  tlsConfig: {}
+  scrapeTimeout: 30s
+  relabelings: []
+
+#nodeSelector: |
+#  selector: label
+#
+#topologySpreadConstraints: |
+#  - maxSkew: 1
+#    topologyKey: topology.kubernetes.io/zone
+#    whenUnsatisfiable: DoNotSchedule
+#    labelSelector:
+#      matchLabels:
+#        {{- include "publicip-exporter.selectorLabels" . | nindent 6 }}
+#
+#affinity: |
+#  podAntiAffinity:
+#    requiredDuringSchedulingIgnoredDuringExecution:
+#      - labelSelector:
+#          matchLabels:
+#            {{- include "publicip-exporter.selectorLabels" . | nindent 10 }}
+#        topologyKey: kubernetes.io/hostname
+#
+#tolerations: |
+#  - effect: NoSchedule
+#    operator: Exists
+
+podSecurityContext: {}
+
+containerSecurityContext:
+  privileged: false
+  runAsUser: 1000

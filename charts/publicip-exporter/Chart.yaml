@@ -1,0 +1,8 @@
+apiVersion: v2
+name: publicip-exporter
+description: Prometheus exporter for public IP information and network reachability metrics
+type: application
+appVersion: v0.1.0
+version: 0.1.0
+maintainers:
+  - name: AndreZiviani
